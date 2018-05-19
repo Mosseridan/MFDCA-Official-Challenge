@@ -1,0 +1,12 @@
+cmd,count
+popper,89
+rm,2
+generic,1
+FIFO,1
+rmdir,1
+LOCK,1
+sh,1
+UNLOCK,1
+ls,1
+tcppost,1
+sed,1

@@ -1,0 +1,10 @@
+cmd,count
+tcsh,31
+rshd,29
+rdistd,29
+ls,4
+nslookup,2
+more,2
+cat,1
+grep,1
+mail,1

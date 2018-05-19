@@ -1,0 +1,13 @@
+cmd,count
+expr,30
+egrep,20
+java,10
+dirname,10
+rm,6
+basename,5
+javac,5
+.java_wr,5
+make,4
+ls,3
+frm,1
+vim,1

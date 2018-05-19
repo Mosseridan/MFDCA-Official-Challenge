@@ -1,0 +1,8 @@
+cmd,count
+sh,31
+gmake,23
+driver,16
+ld64_,8
+fec,8
+be,8
+inline,6

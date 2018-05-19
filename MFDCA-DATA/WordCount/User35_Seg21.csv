@@ -1,0 +1,10 @@
+cmd,count
+sh,58
+make,16
+sed,15
+rm,6
+rcp,1
+rshd,1
+echo,1
+ls,1
+vim,1

@@ -1,0 +1,6 @@
+cmd,count
+sh,33
+tail,33
+fgrep,32
+sort,1
+sed,1

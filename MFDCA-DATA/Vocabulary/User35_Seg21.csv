@@ -1,0 +1,9 @@
+echo
+ls
+make
+rcp
+rm
+rshd
+sed
+sh
+vim

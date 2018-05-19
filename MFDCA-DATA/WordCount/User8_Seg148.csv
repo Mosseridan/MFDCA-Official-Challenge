@@ -1,0 +1,4 @@
+cmd,count
+sh,44
+grep,44
+nawk,12

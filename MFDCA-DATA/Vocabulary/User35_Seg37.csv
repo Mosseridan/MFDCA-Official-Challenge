@@ -1,0 +1,4 @@
+make
+rm
+sed
+sh

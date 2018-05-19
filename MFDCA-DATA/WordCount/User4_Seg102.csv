@@ -1,0 +1,10 @@
+cmd,count
+rsh,25
+sh,13
+rshd,13
+nawk,13
+cat,12
+grep,11
+expr,11
+tail,1
+sed,1

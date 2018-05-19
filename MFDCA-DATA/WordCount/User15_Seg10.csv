@@ -1,0 +1,7 @@
+cmd,count
+cat,32
+nawk,32
+cut,18
+htn_repo,16
+tee,1
+egrep,1

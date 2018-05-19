@@ -1,0 +1,16 @@
+cmd,count
+sh,20
+expr,19
+engine,11
+purify.s,9
+driver,9
+dirname,9
+fecc,8
+be,7
+ex,2
+basename,1
+make,1
+nm_elf,1
+ln,1
+ld_,1
+edg_prel,1

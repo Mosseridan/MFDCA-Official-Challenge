@@ -1,0 +1,14 @@
+cmd,count
+gcc,25
+uname,12
+nawk,12
+cc1,11
+cpp,10
+make,6
+as,6
+bison,6
+flex,5
+nm,2
+ld,2
+ld_,2
+mkpts,1

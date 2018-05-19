@@ -1,0 +1,16 @@
+cmd,count
+sh,40
+date,28
+wc,9
+stty,4
+tcsh,4
+head,3
+efm,3
+rm,2
+rmdir,1
+cat,1
+make,1
+xmkmf,1
+mkdir,1
+imake,1
+cpp,1

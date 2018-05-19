@@ -1,0 +1,15 @@
+cmd,count
+cat,36
+keep_up,10
+sh,10
+tcsh,9
+flock,9
+ls,6
+hostname,5
+nawk,4
+date,4
+more,2
+sleep,2
+cgiparse,1
+hightoll,1
+my.ls,1

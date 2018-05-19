@@ -1,0 +1,5 @@
+cmd,count
+sh,43
+grep,41
+nawk,15
+makexgvi,1

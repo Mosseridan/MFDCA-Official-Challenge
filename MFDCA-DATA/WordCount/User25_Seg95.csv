@@ -1,0 +1,5 @@
+cmd,count
+sh,50
+wc,48
+format.d,1
+date,1
