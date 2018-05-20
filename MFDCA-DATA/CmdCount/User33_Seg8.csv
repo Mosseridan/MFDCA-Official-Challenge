@@ -1,0 +1,16 @@
+cmd,count
+sh,16
+troff,11
+tbl,10
+eqn,10
+sed,10
+echo,9
+ex,7
+dpost,6
+gs,5
+ghostvie,5
+cat,4
+sendmail,3
+netscape,2
+netstat,1
+mailx,1

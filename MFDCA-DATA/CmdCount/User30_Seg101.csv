@@ -1,0 +1,15 @@
+cmd,count
+sh,38
+virtex,23
+dvips,15
+gs,13
+ftp,2
+nawk,1
+date,1
+true,1
+id,1
+grep,1
+lp,1
+getopt,1
+hostname,1
+mkpts,1

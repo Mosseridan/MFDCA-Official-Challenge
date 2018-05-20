@@ -1,0 +1,17 @@
+cmd,count
+sh,18
+fec,11
+driver,10
+inline,9
+cat,9
+rm,9
+be,9
+gmake,6
+sed,6
+ln,6
+ar,2
+less,1
+configur,1
+cmp,1
+grep,1
+rlogin,1

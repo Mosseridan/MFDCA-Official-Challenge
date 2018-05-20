@@ -1,0 +1,15 @@
+cmd,count
+a.out,15
+ex,14
+gcc,12
+sh,8
+uname,6
+nawk,6
+as,6
+nm,6
+ld,6
+cpp,6
+cc1,6
+ld_,5
+gdb,3
+ksh,1

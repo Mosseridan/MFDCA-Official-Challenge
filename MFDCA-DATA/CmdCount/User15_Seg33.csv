@@ -1,0 +1,17 @@
+cmd,count
+cat,32
+nawk,31
+tcsh,6
+sh,6
+keep_up,6
+flock,5
+htn_repo,3
+cut,2
+egrep,2
+tee,1
+date,1
+print_us,1
+print_do,1
+sleep,1
+findobj,1
+sed,1

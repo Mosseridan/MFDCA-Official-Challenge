@@ -1,0 +1,14 @@
+cmd,count
+sh,16
+eqn,11
+troff,11
+sed,11
+gs,10
+tbl,10
+ghostvie,10
+dpost,6
+echo,6
+ex,4
+pwd,3
+rm,1
+chmod,1

@@ -1,0 +1,16 @@
+cmd,count
+sh,19
+sort,19
+acroread,14
+ls,12
+cat,7
+basename,7
+expr,6
+uname,4
+gs,3
+nawk,2
+ksh,2
+gzip,2
+rm,1
+true,1
+ghostvie,1

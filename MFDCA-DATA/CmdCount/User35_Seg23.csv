@@ -1,0 +1,11 @@
+cmd,count
+sh,48
+sed,16
+make,15
+gcc,4
+rm,4
+uname,3
+nawk,3
+cpp,3
+as,2
+cc1,2

@@ -1,0 +1,16 @@
+cmd,count
+gcc,22
+uname,11
+nawk,11
+spec,9
+as,6
+cat,6
+cpp,6
+cc1,6
+make,5
+ld_,5
+nm,5
+ld,5
+ls,1
+dbxpcs,1
+dbx,1

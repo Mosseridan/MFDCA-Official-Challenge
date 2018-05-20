@@ -1,0 +1,16 @@
+cmd,count
+gcc,24
+uname,12
+nawk,12
+ld_,9
+nm,9
+ld,9
+make,6
+enc,4
+as,3
+ex,3
+cpp,3
+cc1,3
+sdec,1
+xv,1
+psnr,1

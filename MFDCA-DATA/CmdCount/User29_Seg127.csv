@@ -1,0 +1,17 @@
+cmd,count
+generic,24
+date,12
+cat,10
+tcpostio,10
+gethost,9
+ls,7
+sendmail,6
+download,4
+FIFO,4
+sed,4
+expr,3
+rm,3
+popper,1
+touch,1
+sleep,1
+netscape,1

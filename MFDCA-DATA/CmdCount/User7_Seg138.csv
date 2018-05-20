@@ -1,0 +1,14 @@
+cmd,count
+sh,25
+inline,14
+driver,14
+be,14
+fec,14
+gmake,6
+ar,5
+rlogin,2
+ksh,2
+ps,1
+tput,1
+grep,1
+top,1

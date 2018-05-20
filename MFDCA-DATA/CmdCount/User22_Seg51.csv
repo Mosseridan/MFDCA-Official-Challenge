@@ -1,0 +1,15 @@
+cmd,count
+sh,28
+virtex,22
+MakeTeXP,11
+mkdir,6
+gs,6
+egrep,6
+rm,5
+gsftopk,5
+ln,5
+mkpts,2
+bibtex,1
+ls,1
+ghostvie,1
+dvips,1

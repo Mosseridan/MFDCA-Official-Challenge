@@ -1,0 +1,15 @@
+cmd,count
+sh,30
+rshd,29
+cat,24
+sendmail,3
+grep,3
+rm,2
+mailx,2
+seecalls,1
+vim,1
+tail,1
+netscape,1
+sed,1
+echo,1
+java,1

@@ -1,0 +1,13 @@
+cmd,count
+sendmail,44
+mailx,20
+cgiparse,10
+cat,6
+pq,6
+cut,2
+date,2
+pwd,2
+sh,2
+ex,2
+Mail,2
+register,2

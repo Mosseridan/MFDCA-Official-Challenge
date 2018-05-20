@@ -1,0 +1,16 @@
+cmd,count
+sh,13
+wc,12
+touch,12
+grep,12
+chmod,12
+sed,11
+ksh,6
+gs,6
+ls,4
+virtex,3
+ln,3
+ghostvie,2
+dvips,2
+rm,1
+more,1

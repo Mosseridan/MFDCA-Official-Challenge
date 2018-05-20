@@ -1,0 +1,11 @@
+cmd,count
+sh,21
+fec,19
+driver,19
+be,19
+inline,16
+rlogin,2
+ar,1
+egrep,1
+gmake,1
+tput,1

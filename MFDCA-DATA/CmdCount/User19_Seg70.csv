@@ -1,0 +1,17 @@
+cmd,count
+gcc,22
+uname,11
+nawk,11
+as,10
+cpp,10
+cc1,10
+ugen,5
+driver,5
+as1,5
+cfe,5
+make,1
+ld_,1
+nm,1
+touch,1
+ld,1
+t,1

@@ -1,0 +1,12 @@
+cmd,count
+sh,31
+rshd,19
+rsh,10
+echo,9
+nawk,5
+cat,5
+sed,5
+ama.chec,5
+cpio,4
+rcp,4
+ln,3

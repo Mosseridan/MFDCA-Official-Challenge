@@ -1,0 +1,15 @@
+cmd,count
+sh,27
+rshd,17
+ping,14
+rsh,8
+echo,8
+cpio,4
+cat,4
+ama.chec,4
+nawk,4
+sed,4
+addrinfo,2
+rcp,2
+awk,1
+ln,1

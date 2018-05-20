@@ -1,0 +1,17 @@
+cmd,count
+gcc,14
+cat,9
+lex.spec,8
+ld,7
+nm,7
+uname,6
+nawk,6
+ld_,6
+as,6
+cc1,6
+less,6
+cpp,6
+flex,5
+ls,5
+rm,2
+make,1

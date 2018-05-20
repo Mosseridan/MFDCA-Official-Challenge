@@ -1,0 +1,10 @@
+cmd,count
+tail,31
+fgrep,30
+sh,30
+nawk,3
+sort,2
+ls,1
+date,1
+compress,1
+sed,1

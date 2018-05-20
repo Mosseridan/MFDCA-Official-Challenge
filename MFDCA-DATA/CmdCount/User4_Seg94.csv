@@ -1,0 +1,14 @@
+cmd,count
+sh,33
+tail,21
+fgrep,20
+rshd,9
+grep,6
+echo,4
+nawk,1
+do.priso,1
+find,1
+w,1
+cat,1
+trn,1
+mailx,1

@@ -1,0 +1,16 @@
+cmd,count
+sh,28
+tail,26
+fgrep,25
+pq,4
+nawk,3
+rshd,3
+sort,2
+expr,2
+date,1
+ls,1
+grep,1
+compress,1
+sed,1
+mailx,1
+echo,1

@@ -1,0 +1,16 @@
+cmd,count
+cat,20
+rsh,14
+sed,10
+sh,9
+rshd,7
+sort,6
+prison_f,6
+date,5
+grep,5
+nawk,5
+egrep,3
+scampdet,3
+echo,3
+rm,2
+expr,2

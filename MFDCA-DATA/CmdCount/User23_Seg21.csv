@@ -1,0 +1,16 @@
+cmd,count
+true,15
+generic,15
+ls,10
+FIFO,5
+nawk,5
+date,5
+id,5
+find,5
+lp,5
+getopt,5
+hostname,5
+grep,5
+sed,5
+tail,5
+cat,5

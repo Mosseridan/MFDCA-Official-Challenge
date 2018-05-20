@@ -1,0 +1,15 @@
+cmd,count
+sh,36
+date,25
+wc,14
+tcsh,5
+efm,4
+stty,4
+head,4
+gcc,2
+make,1
+uname,1
+nawk,1
+ld_,1
+nm,1
+ld,1

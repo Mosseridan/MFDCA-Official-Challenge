@@ -1,0 +1,15 @@
+cmd,count
+awk,25
+sed,16
+cat,14
+gre,14
+rm,12
+wc,8
+field,3
+addrinfo,2
+grep,1
+mc,1
+uniq,1
+nslookup,1
+vim,1
+sort,1

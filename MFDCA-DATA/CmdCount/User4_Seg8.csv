@@ -1,0 +1,17 @@
+cmd,count
+sh,27
+fgrep,21
+tail,21
+egrep,8
+expr,4
+rshd,3
+java,3
+basename,2
+.java_wr,2
+dirname,2
+grep,2
+seecalls,1
+nawk,1
+do.priso,1
+find,1
+cat,1

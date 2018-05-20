@@ -1,0 +1,15 @@
+cmd,count
+cat,20
+ppost,15
+ln,12
+generic,11
+bc,5
+rm,5
+date,5
+expr,5
+hpost,5
+awk,5
+file,5
+postprin,5
+getpgrp,1
+lp,1

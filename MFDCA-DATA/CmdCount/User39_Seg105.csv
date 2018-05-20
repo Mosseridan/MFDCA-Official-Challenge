@@ -1,0 +1,15 @@
+cmd,count
+tcsh,25
+cat,20
+grep,13
+sed,11
+ls,5
+sort,5
+msort,3
+list2.pl,3
+stream_t,3
+call_fil,3
+overlap,3
+test2.pl,2
+sh,2
+detail_o,2

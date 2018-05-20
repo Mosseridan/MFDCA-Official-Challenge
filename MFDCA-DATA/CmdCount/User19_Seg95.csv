@@ -1,0 +1,17 @@
+cmd,count
+driver,22
+as1,20
+cfe,20
+ugen,20
+make,3
+ld_,2
+rm,2
+sh,2
+dd,2
+cat,1
+mkdir,1
+xmkmf,1
+imake,1
+touch,1
+rmdir,1
+cpp,1

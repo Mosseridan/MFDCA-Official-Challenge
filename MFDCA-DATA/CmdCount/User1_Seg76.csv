@@ -1,0 +1,16 @@
+cmd,count
+sendmail,48
+sh,16
+MediaMai,16
+nawk,3
+finger,2
+pine,2
+grep,2
+hostname,2
+rsh,2
+whois,2
+cat,1
+tset,1
+date,1
+tcsh,1
+mail,1

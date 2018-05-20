@@ -1,0 +1,9 @@
+cmd,count
+wc,32
+rm,16
+ntrim,16
+test,16
+ln,16
+ls,2
+mkdir,1
+ksh,1

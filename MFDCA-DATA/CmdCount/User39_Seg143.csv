@@ -1,0 +1,11 @@
+cmd,count
+sed,24
+rm,17
+sh,17
+gmake,16
+cat,12
+ln,10
+cmp,1
+grep,1
+ar,1
+configur,1

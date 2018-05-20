@@ -1,0 +1,12 @@
+cmd,count
+touch,17
+sed,16
+grep,15
+wc,15
+chmod,15
+sh,15
+ls,2
+mkdir,2
+rm,1
+shar,1
+ksh,1

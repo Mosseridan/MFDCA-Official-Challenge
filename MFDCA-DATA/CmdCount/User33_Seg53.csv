@@ -1,0 +1,16 @@
+cmd,count
+sh,22
+echo,22
+cat,13
+more,10
+ex,7
+mailx,7
+sendmail,6
+lc,2
+date,2
+mc,2
+ls,2
+touch,2
+stty,1
+test,1
+ln,1

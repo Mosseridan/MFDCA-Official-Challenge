@@ -1,0 +1,15 @@
+cmd,count
+sh,20
+MakeTeXP,19
+rm,10
+mkdir,10
+egrep,10
+gs,9
+gsftopk,4
+dvips,4
+virtex,4
+ln,4
+mkpts,2
+launchef,2
+xdvi.rea,1
+xdvi,1
