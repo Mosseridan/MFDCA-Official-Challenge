@@ -136,6 +136,7 @@ def main():
 
 
     for rep in reps:
+        print('\n@@ Rep: ',rep)
         metrics[rep] = {}
         train_features, train_labels, test_features, test_labels, vocabulary = get_data_from_obj(dataset_obj)
     
@@ -143,8 +144,10 @@ def main():
         commands_feature_column = tf.feature_column.categorical_column_with_vocabulary_list(key="commands", vocabulary_list=vocabulary)
     
         for learning_rate in learning_rates_to_try:
+            print('\n@@ Learning rate: ',learning_rate)
             metrics[rep][learning_rate] = {}
-            for steps in steps_to_try: 
+            for steps in steps_to_try:
+                print('\n@@ Steps: ',steps)
                 metrics[rep][learning_rate][steps] = {}
 
                 # use AdagradOptimizer with gradient clipings
@@ -160,7 +163,7 @@ def main():
                     optimizer=my_optimizer,
                 )
 
-                 
+                print('\n@@ Running linear classifier: ')                
                 metrics[rep][learning_rate][steps]['linear_classifier'] = train_and_test_classifier(
                     classifier,
                     steps,
@@ -172,18 +175,20 @@ def main():
 
                 metrics[rep][learning_rate][steps]['dnn_classifier'] = {}
                 for hidden_units in hidden_units_to_try:
+                    print('\n@@ Hidden units: ',hidden_units)                                
                     metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)] = {}
         
                     # DNN classifier with indicator column
                     commands_indicator_column = tf.feature_column.indicator_column(commands_feature_column)
                     feature_columns = [ commands_indicator_column ]
-            
+
                     classifier = tf.estimator.DNNClassifier(
                         feature_columns=feature_columns,
                         hidden_units=hidden_units,
                         optimizer=my_optimizer
                     )
 
+                    print('\n@@ Running dnn classifier with indicator column: ')                                
                     metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['indicator_column'] = train_and_test_classifier(
                         classifier,
                         steps,
@@ -196,6 +201,7 @@ def main():
                     # DNN classifier with embedding column
                     metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['embedding_column'] = {}
                     for embedding_dim in embedding_dims_to_try:
+                        print('\n@@ Embedding dim: ',embedding_dim)                                                    
                         commands_embedding_column = tf.feature_column.embedding_column(commands_feature_column, dimension=embedding_dim)
                         feature_columns = [ commands_embedding_column ]
                         
@@ -205,6 +211,7 @@ def main():
                             optimizer=my_optimizer
                         )
 
+                        print('\n@@ Running dnn classifier with embedding column: ')                                                    
                         metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['embedding_column'][str(embedding_dim)] = train_and_test_classifier(
                             classifier,
                             steps,
@@ -214,6 +221,7 @@ def main():
                             test_labels)
 
 
+    print('\n@@ Writing metrics to metrics.json')                                                        
     with open(os.path.abspath(os.path.join('MFDCA-DATA','metrics.json')), 'w') as outfile:
         json.dump(metrics, outfile)
 
