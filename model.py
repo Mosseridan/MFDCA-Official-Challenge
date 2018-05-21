@@ -1,6 +1,7 @@
 from __future__ import absolute_import, division, print_function
 
 import os
+import csv
 import json
 import random
 import numpy as np
@@ -130,11 +131,45 @@ def main():
     metrics = {}
 
     data_json_name = os.path.abspath(os.path.join('MFDCA-DATA','dataset.json'))
-
+    metrics_csv_name = os.path.abspath(os.path.join('MFDCA-DATA','metrics.csv'))
+    
     with open(data_json_name,'r') as dataset_json:
         dataset_obj = json.load(dataset_json)
 
 
+    metrics_csv = open(metrics_csv_name, 'w', newline='')
+    fieldnames = [
+        'rep',
+        'learning_rate',
+        'steps',
+        'classifier',
+        'feature_column',
+        'train_auc_precision_recall',
+        'train_recall',
+        'train_average_loss',
+        'train_accuracy_baseline',
+        'train_accuracy',
+        'train_auc',
+        'train_loss',
+        'train_label/mean',
+        'train_precision',
+        'train_global_step',
+        'train_prediction/mean',
+        'test_auc_precision_recall',
+        'test_recall',
+        'test_average_loss',
+        'test_accuracy_baseline',
+        'test_accuracy',
+        'test_auc',
+        'test_loss',
+        'test_label/mean',
+        'test_precision',
+        'test_global_step',
+        'test_prediction/mean'
+    ]
+    csv_writer = csv.DictWriter(metrics_csv, fieldnames=fieldnames)
+    csv_writer.writeheader()
+    
     for rep in reps:
         print('\n@@ Rep: ',rep)
         metrics[rep] = {}
@@ -164,14 +199,38 @@ def main():
                 )
 
                 print('\n@@ Running linear classifier: ')                
-                metrics[rep][learning_rate][steps]['linear_classifier'] = train_and_test_classifier(
-                    classifier,
-                    steps,
-                    train_features,
-                    train_labels,
-                    test_features,
-                    test_labels)
-        
+                m = train_and_test_classifier(classifier, steps, train_features, train_labels, test_features, test_labels)
+
+                metrics[rep][learning_rate][steps]['linear_classifier'] = m
+                csv_writer.writerow({
+                    'rep': rep,
+                    'learning_rate': learning_rate,
+                    'steps': steps,
+                    'classifier': 'linear classifier',
+                    'feature_column': 'categorical column with vocabulary list',
+                    'train_auc_precision_recall':m['train_metrics']['auc_precision_recall'],
+                    'train_recall':m['train_metrics']['recall'],
+                    'train_average_loss':m['train_metrics']['average_loss'],
+                    'train_accuracy_baseline':m['train_metrics']['accuracy_baseline'],
+                    'train_accuracy':m['train_metrics']['accuracy'],
+                    'train_auc':m['train_metrics']['auc'],
+                    'train_loss':m['train_metrics']['loss'],
+                    'train_label/mean':m['train_metrics']['label/mean'],
+                    'train_precision':m['train_metrics']['precision'],
+                    'train_global_step':m['train_metrics']['global_step'],
+                    'train_prediction/mean':m['train_metrics']['prediction/mean'],
+                    'test_auc_precision_recall':m['test_metrics']['auc_precision_recall'],
+                    'test_recall':m['test_metrics']['recall'],
+                    'test_average_loss':m['test_metrics']['average_loss'],
+                    'test_accuracy_baseline':m['test_metrics']['accuracy_baseline'],
+                    'test_accuracy':m['test_metrics']['accuracy'],
+                    'test_auc':m['test_metrics']['auc'],
+                    'test_loss':m['test_metrics']['loss'],
+                    'test_label/mean':m['test_metrics']['label/mean'],
+                    'test_precision':m['test_metrics']['precision'],
+                    'test_global_step':m['test_metrics']['global_step'],
+                    'test_prediction/mean':m['test_metrics']['prediction/mean']
+                })
 
                 metrics[rep][learning_rate][steps]['dnn_classifier'] = {}
                 for hidden_units in hidden_units_to_try:
@@ -189,13 +248,38 @@ def main():
                     )
 
                     print('\n@@ Running dnn classifier with indicator column: ')                                
-                    metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['indicator_column'] = train_and_test_classifier(
-                        classifier,
-                        steps,
-                        train_features,
-                        train_labels,
-                        test_features,
-                        test_labels)
+                    m = train_and_test_classifier(classifier, steps, train_features, train_labels, test_features, test_labels)
+                   
+                    metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['indicator_column'] = m
+                    csv_writer.writerow({
+                        'rep': rep,
+                        'learning_rate': learning_rate,
+                        'steps': steps,
+                        'classifier': 'dnn classifier with '+str(hidden_units)+' hidden_units',
+                        'feature_column': 'indicator column',
+                        'train_auc_precision_recall':m['train_metrics']['auc_precision_recall'],
+                        'train_recall':m['train_metrics']['recall'],
+                        'train_average_loss':m['train_metrics']['average_loss'],
+                        'train_accuracy_baseline':m['train_metrics']['accuracy_baseline'],
+                        'train_accuracy':m['train_metrics']['accuracy'],
+                        'train_auc':m['train_metrics']['auc'],
+                        'train_loss':m['train_metrics']['loss'],
+                        'train_label/mean':m['train_metrics']['label/mean'],
+                        'train_precision':m['train_metrics']['precision'],
+                        'train_global_step':m['train_metrics']['global_step'],
+                        'train_prediction/mean':m['train_metrics']['prediction/mean'],
+                        'test_auc_precision_recall':m['test_metrics']['auc_precision_recall'],
+                        'test_recall':m['test_metrics']['recall'],
+                        'test_average_loss':m['test_metrics']['average_loss'],
+                        'test_accuracy_baseline':m['test_metrics']['accuracy_baseline'],
+                        'test_accuracy':m['test_metrics']['accuracy'],
+                        'test_auc':m['test_metrics']['auc'],
+                        'test_loss':m['test_metrics']['loss'],
+                        'test_label/mean':m['test_metrics']['label/mean'],
+                        'test_precision':m['test_metrics']['precision'],
+                        'test_global_step':m['test_metrics']['global_step'],
+                        'test_prediction/mean':m['test_metrics']['prediction/mean']
+                    })
 
 
                     # DNN classifier with embedding column
@@ -212,15 +296,48 @@ def main():
                         )
 
                         print('\n@@ Running dnn classifier with embedding column: ')                                                    
-                        metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['embedding_column'][str(embedding_dim)] = train_and_test_classifier(
+                        m = train_and_test_classifier(
                             classifier,
                             steps,
                             train_features,
                             train_labels,
                             test_features,
                             test_labels)
+                        
+                        metrics[rep][learning_rate][steps]['dnn_classifier'][str(hidden_units)]['embedding_column'][str(embedding_dim)] = m
+                        csv_writer.writerow({
+                            'rep': rep,
+                            'learning_rate': learning_rate,
+                            'steps': steps,
+                            'classifier': 'dnn classifier with '+str(hidden_units)+' hidden_units',
+                            'feature_column': str(embedding_dim)+' dim embedding column',
+                            'train_auc_precision_recall':m['train_metrics']['auc_precision_recall'],
+                            'train_recall':m['train_metrics']['recall'],
+                            'train_average_loss':m['train_metrics']['average_loss'],
+                            'train_accuracy_baseline':m['train_metrics']['accuracy_baseline'],
+                            'train_accuracy':m['train_metrics']['accuracy'],
+                            'train_auc':m['train_metrics']['auc'],
+                            'train_loss':m['train_metrics']['loss'],
+                            'train_label/mean':m['train_metrics']['label/mean'],
+                            'train_precision':m['train_metrics']['precision'],
+                            'train_global_step':m['train_metrics']['global_step'],
+                            'train_prediction/mean':m['train_metrics']['prediction/mean'],
+                            'test_auc_precision_recall':m['test_metrics']['auc_precision_recall'],
+                            'test_recall':m['test_metrics']['recall'],
+                            'test_average_loss':m['test_metrics']['average_loss'],
+                            'test_accuracy_baseline':m['test_metrics']['accuracy_baseline'],
+                            'test_accuracy':m['test_metrics']['accuracy'],
+                            'test_auc':m['test_metrics']['auc'],
+                            'test_loss':m['test_metrics']['loss'],
+                            'test_label/mean':m['test_metrics']['label/mean'],
+                            'test_precision':m['test_metrics']['precision'],
+                            'test_global_step':m['test_metrics']['global_step'],
+                            'test_prediction/mean':m['test_metrics']['prediction/mean']
+                        })
 
-
+    
+    metrics_csv.close()
+    
     print('\n@@ Writing metrics to metrics.json')                                                        
     with open(os.path.abspath(os.path.join('MFDCA-DATA','metrics.json')), 'w') as outfile:
         json.dump(metrics, outfile)
