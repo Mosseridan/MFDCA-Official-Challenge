@@ -123,9 +123,9 @@ def main():
     # tf.enable_eager_execution()
     # print("TensorFlow version: {}".format(tf.VERSION))
     # print("Eager execution: {}".format(tf.executing_eagerly()))
-    reps = range(2)
-    steps_to_try = [1000, 2000]
-    embedding_dims_to_try = [2, 10, 100]
+    reps = range(4)
+    steps_to_try = [500, 1000, 2000]
+    embedding_dims_to_try = [2, 4, 10, 100]
     learning_rates_to_try = [0.1 , 0.01]
     hidden_units_to_try = [[4,4], [10,10], [20,20]]
     metrics = {}
@@ -338,9 +338,9 @@ def main():
     
     metrics_csv.close()
     
-    print('\n@@ Writing metrics to metrics.json')                                                        
-    with open(os.path.abspath(os.path.join('MFDCA-DATA','metrics.json')), 'w') as outfile:
-        json.dump(metrics, outfile)
+    # print('\n@@ Writing metrics to metrics.json')                                                        
+    # with open(os.path.abspath(os.path.join('MFDCA-DATA','metrics.json')), 'w') as outfile:
+    #     json.dump(metrics, outfile)
 
 
     # try:
