@@ -8,6 +8,7 @@ import numpy as np
 # import pandas as pd
 import tensorflow as tf
 import tensorflow.contrib.eager as tfe
+from tensorflow import keras
 import matplotlib.pyplot as plt
 
 from pprint import pprint
@@ -15,7 +16,7 @@ from process_data import get_segments
 
 
 
-def get_data_from_obj(dataset_obj, ratio=30):
+def get_data_from_obj(dataset_obj, ratio=50):
     """
     Args:
       dataset_obj: an object containing the data
@@ -32,15 +33,15 @@ def get_data_from_obj(dataset_obj, ratio=30):
 
     split = int(len(segments)*ratio/100)
     test_features = { 'commands': [segment['commands'] for segment in segments[0:split]] }
-    test_labels = [float(segment['label']) for segment in segments[0:split]]
+    test_labels = [int(segment['label']) for segment in segments[0:split]]
     train_features = { 'commands': [segment['commands'] for segment in segments[split:]] }
-    train_labels = [float(segment['label']) for segment in segments[split:]]
+    train_labels = [int(segment['label']) for segment in segments[split:]]
     
     return train_features, train_labels, test_features, test_labels, vocabulary
 
 
 
-def get_data_from_json(filename, ratio=30):
+def get_data_from_json(filename, ratio=50):
     """
     Args:
       filename: the json filename containing the data
@@ -135,6 +136,35 @@ def main():
     
     with open(data_json_name,'r') as dataset_json:
         dataset_obj = json.load(dataset_json)
+
+    # filenames = [os.path.abspath(os.path.join('MFDCA-DATA','FraudedRawData','User'+str(i))) for i in range(40)]
+    with open(os.path.abspath(os.path.join('MFDCA-DATA','segments.json')),'r') as segments_json:
+        segments = json.load(segments_json)
+    docs = [' '.join(segment['commands']) for segment in segments]
+    # create the tokenizer
+    tokenizer = keras.preprocessing.text.Tokenizer()
+    # fit the tokenizer on the documents
+    tokenizer.fit_on_texts(docs)
+    # summarize what was learned
+    print('tokenizer word counts:\n',tokenizer.word_counts)
+    print('tokenizer document count: ',tokenizer.document_count)
+    print('tokenizer word index:\n',tokenizer.word_index)
+    print('tokenizer word docs:\n',tokenizer.word_docs)
+    # integer encode documents
+    encoded_docs = tokenizer.texts_to_matrix(docs, mode='tfidf')
+    print('encoded docs: ',encoded_docs)
+
+    
+
+
+
+
+
+
+    return
+
+
+
 
 
     metrics_csv = open(metrics_csv_name, 'w', newline='')

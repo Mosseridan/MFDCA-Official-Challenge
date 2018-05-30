@@ -21,36 +21,49 @@ def get_lines(filenames):
     return lines
 
 
-def get_commands(filenames):
-    commands = []
+def get_terms(filenames):
+    terms = []
     for line in get_lines(filenames):
-        commands += line.split()
-    return commands
+        terms += line.split()
+    return terms
 
 
-def get_cmd_count(commands):
-    cmd_count = {}
-    for cmd in commands:
+def get_sequences(terms, seq_size):
+    sequences = []
+    for i in range(len(terms)-seq_size):
+        sequences += [" ".join(terms[i:i+seq_size])]
+    return sequences
+
+def get_sequences_from_file(filenames , seq_size):
+    terms = []
+    for line in get_lines(filenames):
+        terms += line.split()
+    return get_sequences(terms, seq_size)
+    
+
+def get_term_frequency(terms):
+    term_frequency = {}
+    for cmd in terms:
         try:
-            cmd_count[cmd]+=1
+            term_frequency[cmd]+=1
         except KeyError:
-            cmd_count[cmd] = 1
-    return cmd_count
+            term_frequency[cmd] = 1
+    return term_frequency
 
 
-def get_vocabulary_from_cmd_count(cmd_count):
-    return sorted(cmd_count.keys())
+def get_vocabulary_from_term_frequency(term_frequency):
+    return sorted(term_frequency.keys())
 
 
-def get_vocabulary(commands):
-    return get_vocabulary_from_cmd_count(get_cmd_count(commands))
+def get_vocabulary(terms):
+    return get_vocabulary_from_term_frequency(get_term_frequency(terms))
 
 
-def write_cmd_count_to_csv(cmd_count, filename):
+def write_term_frequency_to_csv(term_frequency, filename):
     splitext = os.path.splitext(filename)
     if(splitext[1] != '.csv'):
         filename = splitext[0]+'.csv'
-    sorted_wc = sort_dict_by_val(cmd_count)
+    sorted_wc = sort_dict_by_val(term_frequency)
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['cmd','count'])
@@ -66,17 +79,18 @@ def write_vocabulary_to_csv(vocabulary, filename):
         writer.writerows([[cmd] for cmd in vocabulary])
 
 
-def get_stats(commands):
+def get_stats(terms):
     info = {}
-    info['commands'] = commands
-    info['cmd_count'] = get_cmd_count(commands)
-    # info['sorted_wc'] = sort_dict_by_val(info['cmd_count'])
-    info['vocabulary'] = get_vocabulary_from_cmd_count(info['cmd_count'])
+    info['terms'] = terms
+    info['term_frequency'] = get_term_frequency(terms)
+    # info['sorted_wc'] = sort_dict_by_val(info['term_frequency'])
+    info['vocabulary'] = get_vocabulary_from_term_frequency(info['term_frequency'])
     info['total_wc'] = 0
-    for wc in info['cmd_count'].values():
+    for wc in info['term_frequency'].values():
          info['total_wc'] += wc
     info['vocabulary_size'] = len(info['vocabulary'])
     return info
+
 
 def get_users_stats():
     users = {}
@@ -87,18 +101,19 @@ def get_users_stats():
         for row in reader:
             username = row[0]
             filename = os.path.abspath(os.path.join('MFDCA-DATA','FraudedRawData',username))
-            commands = get_commands(filename)
-            user = get_stats(commands)
+            terms = get_terms(filename)
+            user = get_stats(terms)
             user['segments'] = []
 
-            for i in range(0, len(commands), seg_size): 
-                segment_commands = commands[i:i+seg_size]
-                seg_stats = get_stats(segment_commands)
+            for i in range(0, len(terms), seg_size): 
+                segment_terms = terms[i:i+seg_size]
+                seg_stats = get_stats(segment_terms)
                 seg_stats['label'] = row[int(i/seg_size)+1]
                 user['segments'].append(seg_stats)
             users[username] = user
     
     return users
+
 
 def get_segments_from_users(users):
     segments = []
@@ -109,8 +124,8 @@ def get_segments_from_users(users):
                 'username': username,
                 'segment_number': i,
                 'vocabulary': segment['vocabulary'],
-                'cmd_count': segment['cmd_count'],
-                'commands': segment['commands'],
+                'term_frequency': segment['term_frequency'],
+                'terms': segment['terms'],
                 'label': segment['label']
             })
     return segments
@@ -125,10 +140,10 @@ def get_segments():
         for row in reader:
             username = row[0]
             filename = os.path.abspath(os.path.join('MFDCA-DATA','FraudedRawData',username))
-            commands = get_commands(filename)
-            for i in range(0, len(commands), seg_size): 
-                segment_commands = commands[i:i+seg_size]
-                seg_stats = get_stats(segment_commands)
+            terms = get_terms(filename)
+            for i in range(0, len(terms), seg_size): 
+                segment_terms = terms[i:i+seg_size]
+                seg_stats = get_stats(segment_terms)
                 seg_number = int(i/seg_size)
                 seg_stats['username'] = username
                 seg_stats['segment_number'] = seg_number    
@@ -141,26 +156,27 @@ def get_segments():
 def main():
     filenames = [os.path.abspath(os.path.join('MFDCA-DATA','FraudedRawData','User'+str(i))) for i in range(40)]
     # filenames = [os.path.abspath(os.path.join('MFDCA-DATA','dummy','User'+str(i))) for i in range(2)]
+    
     users = get_users_stats()
     seg_size = 100
     for username, user in users.items():  
-        write_cmd_count_to_csv(user['cmd_count'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount',username)))
+        write_term_frequency_to_csv(user['term_frequency'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount',username)))
         write_vocabulary_to_csv(user['vocabulary'], os.path.abspath(os.path.join('MFDCA-DATA','Vocabulary',username)))
         for i,seg_stats in enumerate(user['segments']):
-            write_cmd_count_to_csv(seg_stats['cmd_count'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount',username+'_Seg'+str(i))))
+            write_term_frequency_to_csv(seg_stats['term_frequency'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount',username+'_Seg'+str(i))))
             write_vocabulary_to_csv(seg_stats['vocabulary'], os.path.abspath(os.path.join('MFDCA-DATA','Vocabulary',username+'_Seg'+str(i))))
 
-    commands = get_commands(filenames)
-    total_stats = get_stats(commands)
-    write_cmd_count_to_csv(total_stats['cmd_count'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount','TotalCmdCount')))
+    terms = get_terms(filenames)
+    total_stats = get_stats(terms)
+    write_term_frequency_to_csv(total_stats['term_frequency'], os.path.abspath(os.path.join('MFDCA-DATA','CmdCount','TotalCmdCount')))
     write_vocabulary_to_csv(total_stats['vocabulary'], os.path.abspath(os.path.join('MFDCA-DATA','Vocabulary','TotalVocabulary')))
 
 
     # print('@@cmd Count:')
     # for key, val in sorted_wc:
     #     print(key+': '+str(val))
-    # print('\n@@ Total numbr of commands: '+str(total_stats['total_wc']))
-    # print('\n@@ Commands per user: '+str(total_stats['total_wc']/40))
+    # print('\n@@ Total numbr of terms: '+str(total_stats['total_wc']))
+    # print('\n@@ terms per user: '+str(total_stats['total_wc']/40))
     # print('\n@@ Vocabulary size: '+str(total_stats['vocabulary_size']))
 
     common_vocabulary_users = list(
@@ -205,10 +221,10 @@ def main():
     # dataset = {
     #     'features': {
     #         'username': [segment['username'] for segment in segments[0:1500]],
-    #         'segment_number': [float(segment['segment_number']) for segment in segments[0:1500]],
-    #         'commands': [segment['commands'] for segment in segments[0:1500]]
+    #         'segment_number': [int(segment['segment_number']) for segment in segments[0:1500]],
+    #         'terms': [segment['terms'] for segment in segments[0:1500]]
     #     },
-    #     'labels': [float(segment['label']) for segment in segments[0:1500]],
+    #     'labels': [int(segment['label']) for segment in segments[0:1500]],
     #     'vocabulary': stats['total_stats']['vocabulary']
     # }
 
