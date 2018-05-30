@@ -5,7 +5,7 @@ import csv
 import json
 import random
 import numpy as np
-# import pandas as pd
+import pandas as pd
 import tensorflow as tf
 import tensorflow.contrib.eager as tfe
 from tensorflow import keras
@@ -145,22 +145,15 @@ def main():
     tokenizer = keras.preprocessing.text.Tokenizer()
     # fit the tokenizer on the documents
     tokenizer.fit_on_texts(docs)
-    # summarize what was learned
-    print('tokenizer word counts:\n',tokenizer.word_counts)
-    print('tokenizer document count: ',tokenizer.document_count)
-    print('tokenizer word index:\n',tokenizer.word_index)
-    print('tokenizer word docs:\n',tokenizer.word_docs)
     # integer encode documents
     encoded_docs = tokenizer.texts_to_matrix(docs, mode='tfidf')
-    print('encoded docs: ',encoded_docs)
-
-    
 
 
-
-
-
-
+    # print('tokenizer word counts:\n',tokenizer.word_counts)
+    # print('tokenizer document count: ',tokenizer.document_count)
+    # print('tokenizer word index:\n',tokenizer.word_index)
+    # print('tokenizer word docs:\n',tokenizer.word_docs)
+    # print('encoded docs: ',encoded_docs)
     return
 
 
